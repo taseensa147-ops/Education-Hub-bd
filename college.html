@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Guidance (Class 11 & 12)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+            --card-bg: rgba(255, 255, 255, 0.08);
+            --card-border: rgba(255, 255, 255, 0.15);
+            --text-main: #f8fafc;
+            --accent: #06b6d4;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
+        body { background: var(--bg-gradient); color: var(--text-main); min-height: 100vh; padding: 2rem 1rem; }
+        
+        .container { max-width: 800px; margin: 0 auto; background: rgba(15, 23, 42, 0.6); padding: 2.5rem; border-radius: 24px; border: 1px solid var(--card-border); }
+        .form-group { margin-bottom: 1.5rem; }
+        label { display: block; margin-bottom: 0.5rem; font-weight: 600; color: #94a3b8; }
+
+        select {
+            width: 100%;
+            padding: 0.85rem 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            color: #fff;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        select option { background: #0f172a; color: #fff; }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #4f46e5 0%, #06b6d4 100%);
+            border: none;
+            border-radius: 12px;
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+        }
+
+        .submit-btn:hover { opacity: 0.9; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1 style="margin-bottom: 1.5rem; text-align: center;">HSC / College Portal</h1>
+    
+    <form id="collegeForm" onsubmit="loadCollegeGuidance(event)">
+        <div class="form-group">
+            <label for="classSelect">Select Academic Year</label>
+            <select id="classSelect" required>
+                <option value="" disabled selected>Choose Class</option>
+                <option value="11">Class 11 (1st Year)</option>
+                <option value="12">Class 12 (2nd Year)</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="streamSelect">Select Group / Stream</label>
+            <select id="streamSelect" required>
+                <option value="" disabled selected>Choose Stream</option>
+                <option value="science">Science</option>
+                <option value="commerce">Commerce</option>
+                <option value="arts">Arts / Humanities</option>
+            </select>
+        </div>
+
+        <button type="submit" class="submit-btn">Access Academic Resources</button>
+    </form>
+</div>
+
+<script>
+    function loadCollegeGuidance(e) {
+        e.preventDefault();
+        const selectedClass = document.getElementById('classSelect').value;
+        const selectedStream = document.getElementById('streamSelect').value;
+        
+        // Route dynamically or trigger API call based on selection
+        alert(`Loading resources for Class ${selectedClass} - ${selectedStream.toUpperCase()} Stream.`);
+    }
+</script>
+</body>
+</html>

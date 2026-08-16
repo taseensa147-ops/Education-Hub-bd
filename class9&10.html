@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class 9 Guidance - Select Stream</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+            --card-bg: rgba(255, 255, 255, 0.08);
+            --card-border: rgba(255, 255, 255, 0.15);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #4f46e5;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
+        body { background: var(--bg-gradient); color: var(--text-main); min-height: 100vh; padding: 2rem 1rem; }
+        
+        .container { max-width: 900px; margin: 0 auto; }
+        .header { text-align: center; margin-bottom: 2rem; }
+        .header h1 { font-size: 2rem; margin-bottom: 0.5rem; }
+
+        .stream-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stream-card {
+            background: var(--card-bg);
+            border: 2px solid var(--card-border);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .stream-card:hover, .stream-card.active {
+            border-color: #38bdf8;
+            transform: translateY(-5px);
+            background: rgba(56, 189, 248, 0.1);
+        }
+
+        .stream-card i { font-size: 2.5rem; color: #38bdf8; margin-bottom: 1rem; }
+        .stream-card h3 { font-size: 1.25rem; }
+
+        .content-panel {
+            display: none;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-top: 1rem;
+        }
+
+        .content-panel.visible { display: block; animation: fadeIn 0.4s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>Class 9 & 10 Academic Guidance</h1>
+        <p>Select your current academic stream to view subjects and study tracks</p>
+    </div>
+
+    <div class="stream-grid">
+        <div class="stream-card" onclick="selectStream('science', this)">
+            <i class="fa-solid fa-atom"></i>
+            <h3>Science</h3>
+        </div>
+        <div class="stream-card" onclick="selectStream('commerce', this)">
+            <i class="fa-solid fa-chart-line"></i>
+            <h3>Commerce</h3>
+        </div>
+        <div class="stream-card" onclick="selectStream('arts', this)">
+            <i class="fa-solid fa-palette"></i>
+            <h3>Arts / Humanities</h3>
+        </div>
+    </div>
+
+    <!-- Dynamic Content Display -->
+    <div id="science-panel" class="content-panel">
+        <h2>Science Stream Guidance</h2>
+        <p>Focus Areas: Physics, Chemistry, Higher Math, Biology.</p>
+    </div>
+    <div id="commerce-panel" class="content-panel">
+        <h2>Commerce Stream Guidance</h2>
+        <p>Focus Areas: Accounting, Finance, Business Entrepreneurship.</p>
+    </div>
+    <div id="arts-panel" class="content-panel">
+        <h2>Arts Stream Guidance</h2>
+        <p>Focus Areas: Civics, Geography, Economics, History.</p>
+    </div>
+</div>
+
+<script>
+    function selectStream(streamName, element) {
+        document.querySelectorAll('.stream-card').forEach(card => card.classList.remove('active'));
+        document.querySelectorAll('.content-panel').forEach(panel => panel.classList.remove('visible'));
+
+        element.classList.add('active');
+        document.getElementById(streamName + '-panel').classList.add('visible');
+    }
+</script>
+</body>
+</html>

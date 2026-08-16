@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University Admission Preparation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+            --card-bg: rgba(255, 255, 255, 0.08);
+            --card-border: rgba(255, 255, 255, 0.15);
+            --text-main: #f8fafc;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
+        body { background: var(--bg-gradient); color: var(--text-main); min-height: 100vh; padding: 2rem 1rem; }
+        .container { max-width: 900px; margin: 0 auto; text-align: center; }
+
+        .unit-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.25rem;
+            margin-top: 2rem;
+        }
+
+        .unit-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-decoration: none;
+            color: var(--text-main);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .unit-card:hover {
+            border-color: #10b981;
+            transform: translateY(-4px);
+            background: rgba(16, 185, 129, 0.1);
+        }
+
+        .unit-card i { font-size: 2rem; color: #10b981; }
+        .unit-card h3 { font-size: 1.1rem; }
+        .unit-card span { font-size: 0.8rem; color: #94a3b8; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Admission Preparation Tracks</h1>
+    <p style="color: #94a3b8;">Select your target preparation unit to get routine and exam prep materials</p>
+
+    <div class="unit-grid">
+        <a href="#engineering" class="unit-card">
+            <i class="fa-solid fa-gear"></i>
+            <h3>Engineering</h3>
+            <span>BUET, RUET, KUET, CUET</span>
+        </a>
+
+        <a href="#medical" class="unit-card">
+            <i class="fa-solid fa-user-doctor"></i>
+            <h3>Medical</h3>
+            <span>MBBS / Dental Prep</span>
+        </a>
+
+        <a href="#iba" class="unit-card">
+            <i class="fa-solid fa-briefcase"></i>
+            <h3>IBA</h3>
+            <span>DU IBA / BUP / JU</span>
+        </a>
+
+        <a href="#unit-a" class="unit-card">
+            <i class="fa-solid fa-flask"></i>
+            <h3>Unit A</h3>
+            <span>Science Division Versity</span>
+        </a>
+
+        <a href="#unit-b" class="unit-card">
+            <i class="fa-solid fa-book"></i>
+            <h3>Unit B</h3>
+            <span>Arts / Humanities Division</span>
+        </a>
+
+        <a href="#unit-c" class="unit-card">
+            <i class="fa-solid fa-coins"></i>
+            <h3>Unit C</h3>
+            <span>Business Studies Division</span>
+        </a>
+    </div>
+</div>
+
+</body>
+</html>
