@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academic Guidance Portal</title>
+    <!-- Google Fonts & FontAwesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-hover: #4338ca;
+            --secondary: #06b6d4;
+            --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+            --card-bg: rgba(255, 255, 255, 0.08);
+            --card-border: rgba(255, 255, 255, 0.15);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: var(--bg-gradient);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--card-border);
+            border-radius: 24px;
+            padding: 2.5rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #38bdf8, #818cf8);
+           -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .section-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .section-card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #e2e8f0;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .section-title i {
+            color: var(--secondary);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 1rem;
+        }
+
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.85rem 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+
+        .btn-link {
+            background: linear-gradient(135deg, rgba(79, 70, 229, 0.2) 0%, rgba(6, 182, 212, 0.2) 100%);
+            border-color: rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-link:hover {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-color: transparent;
+            box-shadow: 0 10px 20px -5px rgba(79, 70, 229, 0.5);
+            transform: translateY(-3px) scale(1.02);
+            color: #fff;
+        }
+
+        .btn-disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            border-style: dashed;
+        }
+
+        .btn-admission {
+            background: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
+            border: none;
+            width: 100%;
+            font-size: 1rem;
+            padding: 1rem;
+        }
+
+        .btn-admission:hover {
+            box-shadow: 0 10px 20px -5px rgba(6, 182, 212, 0.4);
+            transform: translateY(-2px);
+            color: #fff;
+        }
+
+        .badge {
+            font-size: 0.65rem;
+            padding: 2px 6px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 1.5rem;
+            }
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Academic Guidance Hub</h1>
+            <p>Select your class or program to access study guides and resources</p>
+        </header>
+
+        <!-- Primary School -->
+        <div class="section-card">
+            <div class="section-title">
+                <i class="fa-solid fa-shapes"></i> Primary School
+            </div>
+            <div class="grid">
+                <a href="class5.html" class="btn btn-link">
+                    <i class="fa-solid fa-book-bookmark"></i> Class 5
+                </a>
+            </div>
+        </div>
+
+        <!-- Middle School -->
+        <div class="section-card">
+            <div class="section-title">
+                <i class="fa-solid fa-book-open"></i> Middle School
+            </div>
+            <div class="grid">
+                <a href="class6.html" class="btn btn-link">Class 6</a>
+                <a href="class7.html" class="btn btn-link">Class 7</a>
+                <div class="btn btn-disabled">
+                    Class 8 <span class="badge">Soon</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- High School -->
+        <div class="section-card">
+            <div class="section-title">
+                <i class="fa-solid fa-school"></i> High School
+            </div>
+            <div class="grid">
+                <a href="class9.html" class="btn btn-link">Class 9</a>
+                <a href="class10.html" class="btn btn-link">Class 10</a>
+            </div>
+        </div>
+
+        <!-- College / Higher Secondary (Classes 11 & 12) -->
+        <div class="section-card">
+            <div class="section-title">
+                <i class="fa-solid fa-graduation-cap"></i> College / Higher Secondary
+            </div>
+            <div class="grid">
+                <a href="college.html" class="btn btn-link">
+                    <i class="fa-solid fa-chalkboard-user"></i> Class 11 & 12
+                </a>
+            </div>
+        </div>
+
+        <!-- University Admission Preparation -->
+        <div class="section-card">
+            <div class="section-title">
+                <i class="fa-solid fa-compass"></i> Admission Prep
+            </div>
+            <div class="grid" style="grid-template-columns: 1fr;">
+                <a href="admission.html" class="btn btn-admission">
+                    <i class="fa-solid fa-user-graduate"></i> University Admission Guidance
+                </a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
