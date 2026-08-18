@@ -329,6 +329,9 @@
             font-weight: 600;
             margin-bottom: 0.75rem;
             color: #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .subjects-grid {
@@ -364,19 +367,47 @@
             color: #38bdf8;
         }
 
-        /* Leaderboard Box */
+        /* Enhanced Interactive Leaderboard Card */
         .leaderboard-card {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
             border-radius: 16px;
             padding: 1rem;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .leaderboard-card:hover {
+            border-color: rgba(234, 179, 8, 0.5);
+            background: rgba(255, 255, 255, 0.12);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -5px rgba(234, 179, 8, 0.15);
+        }
+
+        .leaderboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .view-all-link {
+            font-size: 0.75rem;
+            color: #38bdf8;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            font-weight: 500;
         }
 
         .leaderboard-list {
             display: flex;
             flex-direction: column;
             gap: 0.5rem;
-            margin-top: 0.5rem;
         }
 
         .leader-item {
@@ -532,34 +563,39 @@
                 </div>
             </section>
 
-            <!-- Leaderboard Box -->
-            <section class="leaderboard-card">
-                <div class="section-header" style="margin-bottom: 0.25rem;">
-                    <i class="fa-solid fa-ranking-star" style="color: #eab308;"></i> Leaderboard
-                </div>
-                <div class="leaderboard-list">
-                    <div class="leader-item">
-                        <div class="leader-info">
-                            <span class="rank top1">1</span>
-                            <span>Tanvir Ahmed</span>
+            <!-- Clickable / Enhanced Leaderboard Section -->
+            <section>
+                <a href="leaderboard.html" class="leaderboard-card" title="Open Full Leaderboard">
+                    <div class="leaderboard-header">
+                        <div class="section-header" style="margin-bottom: 0;">
+                            <span><i class="fa-solid fa-ranking-star" style="color: #eab308;"></i> Leaderboard</span>
                         </div>
-                        <span style="color: var(--accent); font-weight: 600;">1,420 XP</span>
+                        <span class="view-all-link">View All <i class="fa-solid fa-chevron-right"></i></span>
                     </div>
-                    <div class="leader-item">
-                        <div class="leader-info">
-                            <span class="rank top2">2</span>
-                            <span>Alif Hasan</span>
+                    <div class="leaderboard-list">
+                        <div class="leader-item">
+                            <div class="leader-info">
+                                <span class="rank top1">1</span>
+                                <span>Tanvir Ahmed</span>
+                            </div>
+                            <span style="color: var(--accent); font-weight: 600;">1,420 XP</span>
                         </div>
-                        <span style="color: var(--accent); font-weight: 600;">1,280 XP</span>
-                    </div>
-                    <div class="leader-item">
-                        <div class="leader-info">
-                            <span class="rank top3">3</span>
-                            <span>Sadiya Khan</span>
+                        <div class="leader-item">
+                            <div class="leader-info">
+                                <span class="rank top2">2</span>
+                                <span>Alif Hasan</span>
+                            </div>
+                            <span style="color: var(--accent); font-weight: 600;">1,280 XP</span>
                         </div>
-                        <span style="color: var(--accent); font-weight: 600;">1,150 XP</span>
+                        <div class="leader-item">
+                            <div class="leader-info">
+                                <span class="rank top3">3</span>
+                                <span>Sadiya Khan</span>
+                            </div>
+                            <span style="color: var(--accent); font-weight: 600;">1,150 XP</span>
+                        </div>
                     </div>
-                </div>
+                </a>
             </section>
 
         </main>
