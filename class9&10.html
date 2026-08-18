@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Class 9 Guidance - Select Stream</title>
+    <title>Class 9 & 10 Guidance - Select Stream</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -17,49 +17,58 @@
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
-        body { background: var(--bg-gradient); color: var(--text-main); min-height: 100vh; padding: 2rem 1rem; }
-        
-        .container { max-width: 900px; margin: 0 auto; }
+        body { 
+            background: var(--bg-gradient); 
+            color: var(--text-main); 
+            min-height: 100vh; 
+            padding: 2rem 1rem; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container { 
+            max-width: 430px; 
+            width: 100%;
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--card-border);
+            border-radius: 32px;
+            padding: 2rem 1.5rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+        }
+
         .header { text-align: center; margin-bottom: 2rem; }
-        .header h1 { font-size: 2rem; margin-bottom: 0.5rem; }
+        .header h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+        .header p { font-size: 0.85rem; color: var(--text-muted); }
 
         .stream-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
+            grid-template-columns: 1fr;
+            gap: 1.25rem;
         }
 
         .stream-card {
             background: var(--card-bg);
             border: 2px solid var(--card-border);
             border-radius: 16px;
-            padding: 2rem;
+            padding: 1.25rem;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
         }
 
-        .stream-card:hover, .stream-card.active {
+        .stream-card:hover {
             border-color: #38bdf8;
-            transform: translateY(-5px);
+            transform: translateY(-3px);
             background: rgba(56, 189, 248, 0.1);
         }
 
-        .stream-card i { font-size: 2.5rem; color: #38bdf8; margin-bottom: 1rem; }
-        .stream-card h3 { font-size: 1.25rem; }
-
-        .content-panel {
-            display: none;
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 16px;
-            padding: 2rem;
-            margin-top: 1rem;
-        }
-
-        .content-panel.visible { display: block; animation: fadeIn 0.4s ease; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .stream-card i { font-size: 2rem; color: #38bdf8; }
+        .stream-card h3 { font-size: 1.1rem; }
     </style>
 </head>
 <body>
@@ -67,46 +76,38 @@
 <div class="container">
     <div class="header">
         <h1>Class 9 & 10 Academic Guidance</h1>
-        <p>Select your current academic stream to view subjects and study tracks</p>
+        <p>Select your current academic stream to continue to your home page</p>
     </div>
 
     <div class="stream-grid">
-        <div class="stream-card" onclick="selectStream('science', this)">
+        <div class="stream-card" onclick="selectStream('science')">
             <i class="fa-solid fa-atom"></i>
             <h3>Science</h3>
         </div>
-        <div class="stream-card" onclick="selectStream('commerce', this)">
+        <div class="stream-card" onclick="selectStream('commerce')">
             <i class="fa-solid fa-chart-line"></i>
             <h3>Commerce</h3>
         </div>
-        <div class="stream-card" onclick="selectStream('arts', this)">
+        <div class="stream-card" onclick="selectStream('arts')">
             <i class="fa-solid fa-palette"></i>
             <h3>Arts / Humanities</h3>
         </div>
     </div>
-
-    <!-- Dynamic Content Display -->
-    <div id="science-panel" class="content-panel">
-        <h2>Science Stream Guidance</h2>
-        <p>Focus Areas: Physics, Chemistry, Higher Math, Biology.</p>
-    </div>
-    <div id="commerce-panel" class="content-panel">
-        <h2>Commerce Stream Guidance</h2>
-        <p>Focus Areas: Accounting, Finance, Business Entrepreneurship.</p>
-    </div>
-    <div id="arts-panel" class="content-panel">
-        <h2>Arts Stream Guidance</h2>
-        <p>Focus Areas: Civics, Geography, Economics, History.</p>
-    </div>
 </div>
 
 <script>
-    function selectStream(streamName, element) {
-        document.querySelectorAll('.stream-card').forEach(card => card.classList.remove('active'));
-        document.querySelectorAll('.content-panel').forEach(panel => panel.classList.remove('visible'));
+    function selectStream(streamName) {
+        // Save the selection for future reference
+        localStorage.setItem('userStream', streamName);
 
-        element.classList.add('active');
-        document.getElementById(streamName + '-panel').classList.add('visible');
+        // Redirect based on selected stream
+        if (streamName === 'science') {
+            window.location.href = 'sciencehome9.html';
+        } else if (streamName === 'commerce') {
+            window.location.href = 'commercehome9.html';
+        } else if (streamName === 'arts') {
+            window.location.href = 'arthome9.html';
+        }
     }
 </script>
 </body>
