@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopathi - Missions</title>
+    <!-- Google Fonts & FontAwesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --secondary: #06b6d4;
+            --accent: #f59e0b;
+            --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+            --card-bg: rgba(255, 255, 255, 0.08);
+            --card-border: rgba(255, 255, 255, 0.15);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --claimed-bg: rgba(255, 255, 255, 0.03);
+            --claimed-border: rgba(255, 255, 255, 0.05);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: var(--bg-gradient);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+
+        .app-container {
+            width: 100%;
+            max-width: 430px;
+            height: 900px;
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--card-border);
+            border-radius: 32px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+            position: relative;
+        }
+
+        /* Home Page Header */
+        .app-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.25rem 1.25rem 0.75rem 1.25rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .brand-name {
+            font-size: 1.4rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #38bdf8, #818cf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .sp-coin-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            background: rgba(245, 158, 11, 0.15);
+            border: 1px solid rgba(245, 158, 11, 0.4);
+            padding: 0.35rem 0.6rem;
+            border-radius: 20px;
+            color: var(--accent);
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.2s;
+        }
+
+        .sp-coin-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .icon-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            color: var(--text-main);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: background 0.3s;
+        }
+
+        .icon-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        /* Content Scroll Body */
+        .app-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .app-content::-webkit-scrollbar {
+            width: 4px;
+        }
+        .app-content::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+        }
+
+        /* Header Title & Timer */
+        .mission-header-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .mission-header-title h2 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #f8fafc;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .reset-timer {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.3rem 0.6rem;
+            border-radius: 12px;
+            border: 1px solid var(--card-border);
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        /* Tab Controls (DAILY / MONTHLY) */
+        .tab-switcher {
+            display: flex;
+            gap: 0.5rem;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 0.25rem;
+            border-radius: 12px;
+            border: 1px solid var(--card-border);
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 0.5rem;
+            border: none;
+            background: transparent;
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 0.8rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .tab-btn.active {
+            background: var(--accent);
+            color: #0f172a;
+        }
+
+        /* Mission Card List */
+        .missions-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .mission-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 14px;
+            padding: 0.85rem 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+            transition: transform 0.2s, background 0.3s;
+        }
+
+        .mission-card.claimed {
+            background: var(--claimed-bg);
+            border-color: var(--claimed-border);
+            opacity: 0.7;
+        }
+
+        .mission-details {
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+            flex: 1;
+        }
+
+        .mission-title {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .mission-reward {
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+            font-size: 0.75rem;
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* Live Progress Bar Container */
+        .progress-box {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+            margin-top: 0.1rem;
+        }
+
+        .progress-text-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.68rem;
+            color: var(--text-muted);
+        }
+
+        .progress-bar-bg {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #38bdf8, #818cf8);
+            border-radius: 10px;
+            transition: width 0.4s ease;
+        }
+
+        /* Buttons & States */
+        .btn-claim {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: #0f172a;
+            border: none;
+            padding: 0.45rem 0.9rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 0 10px rgba(245, 158, 11, 0.3);
+        }
+
+        .btn-claim:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(245, 158, 11, 0.5);
+        }
+
+        .btn-go {
+            background: rgba(255, 255, 255, 0.9);
+            color: #0f172a;
+            border: none;
+            padding: 0.45rem 1rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            border-radius: 8px;
+            text-decoration: none;
+            text-align: center;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .btn-go:hover {
+            background: #ffffff;
+            transform: scale(1.05);
+        }
+
+        .status-claimed {
+            color: #34d399;
+            font-size: 0.75rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        /* Navigation Bar */
+        .app-footer {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            background: rgba(15, 23, 42, 0.95);
+            border-top: 1px solid var(--card-border);
+            padding: 0.6rem 0;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.2rem;
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 0.65rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-item i {
+            font-size: 1.1rem;
+        }
+
+        .nav-item.active {
+            color: #38bdf8;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+        <!-- Top App Header -->
+        <header class="app-header">
+            <div class="brand-name">Shopathi</div>
+            <div class="header-actions">
+                <a href="shop.html" class="sp-coin-btn" title="SP Coins Store">
+                    <i class="fa-solid fa-coins"></i>
+                    <span id="spCoinCount">250</span>
+                </a>
+                <a href="profile.html" class="icon-btn" title="User Profile">
+                    <i class="fa-solid fa-user"></i>
+                </a>
+                <a href="menu.html" class="icon-btn" title="Menu">
+                    <i class="fa-solid fa-bars"></i>
+                </a>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="app-content">
+            
+            <div class="mission-header-title">
+                <h2><i class="fa-solid fa-bullseye" style="color: #f43f5e;"></i> Daily Missions</h2>
+                <div class="reset-timer">
+                    <i class="fa-regular fa-clock"></i>
+                    <span id="resetCountdown">--:--:--</span>
+                </div>
+            </div>
+
+            <!-- Tab Switcher -->
+            <div class="tab-switcher">
+                <button class="tab-btn active" id="btnDaily" onclick="switchTab('daily')">DAILY</button>
+                <button class="tab-btn" id="btnMonthly" onclick="switchTab('monthly')">MONTHLY</button>
+            </div>
+
+            <!-- Daily Missions Stack -->
+            <div class="missions-list" id="dailyList">
+                
+                <!-- Daily Login Mission -->
+                <div class="mission-card" id="card-login">
+                    <div class="mission-details">
+                        <div class="mission-title">Daily Login to Shopathi</div>
+                        <div class="mission-reward">
+                            <i class="fa-solid fa-coins"></i> +1 SP Coin
+                        </div>
+                    </div>
+                    <div id="action-login">
+                        <button class="btn-claim" onclick="claimReward('login', 1)">CLAIM</button>
+                    </div>
+                </div>
+
+                <!-- 10 Minutes App Usage Mission -->
+                <div class="mission-card" id="card-use10">
+                    <div class="mission-details">
+                        <div class="mission-title">Study / Use app for 10 minutes</div>
+                        <div class="mission-reward">
+                            <i class="fa-solid fa-coins"></i> +2 SP Coins
+                        </div>
+                        <div class="progress-box">
+                            <div class="progress-text-row">
+                                <span id="time-text-use10">0m 0s / 10m 0s</span>
+                                <span id="percent-text-use10">0%</span>
+                            </div>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar-fill" id="fill-use10"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="action-use10">
+                        <a href="home.html" class="btn-go">GO</a>
+                    </div>
+                </div>
+
+                <!-- 20 Minutes App Usage Mission -->
+                <div class="mission-card" id="card-use20">
+                    <div class="mission-details">
+                        <div class="mission-title">Study / Use app for 20 minutes</div>
+                        <div class="mission-reward">
+                            <i class="fa-solid fa-coins"></i> +3 SP Coins
+                        </div>
+                        <div class="progress-box">
+                            <div class="progress-text-row">
+                                <span id="time-text-use20">0m 0s / 20m 0s</span>
+                                <span id="percent-text-use20">0%</span>
+                            </div>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar-fill" id="fill-use20"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="action-use20">
+                        <a href="home.html" class="btn-go">GO</a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Monthly Missions Stack -->
+            <div class="missions-list" id="monthlyList" style="display: none;">
+                <div class="mission-card">
+                    <div class="mission-details">
+                        <div class="mission-title">Maintain a 15-day study streak</div>
+                        <div class="mission-reward">
+                            <i class="fa-solid fa-coins"></i> +25 SP Coins
+                        </div>
+                    </div>
+                    <a href="home.html" class="btn-go">GO</a>
+                </div>
+                <div class="mission-card">
+                    <div class="mission-details">
+                        <div class="mission-title">Complete 20 study chapters</div>
+                        <div class="mission-reward">
+                            <i class="fa-solid fa-coins"></i> +50 SP Coins
+                        </div>
+                    </div>
+                    <a href="home.html" class="btn-go">GO</a>
+                </div>
+            </div>
+
+        </main>
+
+        <!-- Bottom Navigation -->
+        <footer class="app-footer">
+            <a href="home.html" class="nav-item">
+                <i class="fa-solid fa-house"></i>
+                <span>Home</span>
+            </a>
+            <a href="study.html" class="nav-item">
+                <i class="fa-solid fa-book-open"></i>
+                <span>Study</span>
+            </a>
+            <a href="duochingo.html" class="nav-item">
+                <i class="fa-solid fa-gamepad"></i>
+                <span>Duochingo</span>
+            </a>
+            <a href="setting.html" class="nav-item">
+                <i class="fa-solid fa-gear"></i>
+                <span>Setting</span>
+            </a>
+        </footer>
+    </div>
+
+    <script>
+        let coins = parseInt(localStorage.getItem('spCoins')) || 250;
+
+        // Converts runtime to Asia/Dhaka timezone
+        function getBangladeshDate() {
+            const now = new Date();
+            const bstString = now.toLocaleString("en-US", { timeZone: "Asia/Dhaka" });
+            return new Date(bstString);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            updateCoinDisplay();
+            initDateAndMissions();
+            startCountdownTimer();
+            trackTimeUsage();
+        });
+
+        function updateCoinDisplay() {
+            document.getElementById('spCoinCount').innerText = coins;
+            localStorage.setItem('spCoins', coins);
+        }
+
+        /* Bangladesh Standard Time Reset Check */
+        function initDateAndMissions() {
+            const bstNow = getBangladeshDate();
+            
+            const year = bstNow.getFullYear();
+            const month = String(bstNow.getMonth() + 1).padStart(2, '0');
+            const day = String(bstNow.getDate()).padStart(2, '0');
+            const todayBSTStr = `${year}-${month}-${day}`;
+
+            const lastDate = localStorage.getItem('lastMissionDateBST');
+
+            // Reset storage when new BST day starts
+            if (lastDate !== todayBSTStr) {
+                localStorage.setItem('lastMissionDateBST', todayBSTStr);
+                localStorage.setItem('usageSeconds', '0');
+                localStorage.removeItem('claimed_login');
+                localStorage.removeItem('claimed_use10');
+                localStorage.removeItem('claimed_use20');
+            }
+
+            if (localStorage.getItem('claimed_login') === 'true') {
+                markAsClaimed('card-login', 'action-login');
+            }
+
+            checkUsageEligibility();
+        }
+
+        /* Dynamic BST Midnight Reset Countdown */
+        function startCountdownTimer() {
+            function updateTimer() {
+                const bstNow = getBangladeshDate();
+                
+                const bstMidnight = new Date(bstNow);
+                bstMidnight.setDate(bstNow.getDate() + 1);
+                bstMidnight.setHours(0, 0, 0, 0);
+
+                const diff = bstMidnight - bstNow;
+
+                const hrs = Math.floor(diff / (1000 * 60 * 60)).toString().padStart(2, '0');
+                const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+                const secs = Math.floor((diff % (1000 * 60)) / 1000).toString().padStart(2, '0');
+
+                document.getElementById('resetCountdown').innerText = `${hrs}:${mins}:${secs}`;
+            }
+            updateTimer();
+            setInterval(updateTimer, 1000);
+        }
+
+        /* Real-time Usage Tracker */
+        function trackTimeUsage() {
+            setInterval(() => {
+                let currentSeconds = parseInt(localStorage.getItem('usageSeconds') || '0');
+                currentSeconds += 1;
+                localStorage.setItem('usageSeconds', currentSeconds.toString());
+                checkUsageEligibility();
+            }, 1000);
+        }
+
+        /* Updates Progress Bars, Time Readout, and Claim Buttons */
+        function checkUsageEligibility() {
+            const totalSecs = parseInt(localStorage.getItem('usageSeconds') || '0');
+
+            // --- 10 MINUTE MISSION (600 SECONDS) ---
+            const target10Secs = 600;
+            const pct10 = Math.min(100, Math.floor((totalSecs / target10Secs) * 100));
+            
+            const fill10 = document.getElementById('fill-use10');
+            const timeText10 = document.getElementById('time-text-use10');
+            const percentText10 = document.getElementById('percent-text-use10');
+
+            if (fill10) fill10.style.width = pct10 + '%';
+            if (percentText10) percentText10.innerText = pct10 + '%';
+
+            if (timeText10) {
+                const curM = Math.floor(Math.min(totalSecs, target10Secs) / 60);
+                const curS = Math.min(totalSecs, target10Secs) % 60;
+                timeText10.innerText = `${curM}m ${curS}s / 10m 0s`;
+            }
+
+            if (localStorage.getItem('claimed_use10') === 'true') {
+                markAsClaimed('card-use10', 'action-use10');
+            } else if (totalSecs >= target10Secs) {
+                document.getElementById('action-use10').innerHTML = 
+                    `<button class="btn-claim" onclick="claimReward('use10', 2)">CLAIM</button>`;
+            }
+
+            // --- 20 MINUTE MISSION (1200 SECONDS) ---
+            const target20Secs = 1200;
+            const pct20 = Math.min(100, Math.floor((totalSecs / target20Secs) * 100));
+            
+            const fill20 = document.getElementById('fill-use20');
+            const timeText20 = document.getElementById('time-text-use20');
+            const percentText20 = document.getElementById('percent-text-use20');
+
+            if (fill20) fill20.style.width = pct20 + '%';
+            if (percentText20) percentText20.innerText = pct20 + '%';
+
+            if (timeText20) {
+                const curM = Math.floor(Math.min(totalSecs, target20Secs) / 60);
+                const curS = Math.min(totalSecs, target20Secs) % 60;
+                timeText20.innerText = `${curM}m ${curS}s / 20m 0s`;
+            }
+
+            if (localStorage.getItem('claimed_use20') === 'true') {
+                markAsClaimed('card-use20', 'action-use20');
+            } else if (totalSecs >= target20Secs) {
+                document.getElementById('action-use20').innerHTML = 
+                    `<button class="btn-claim" onclick="claimReward('use20', 3)">CLAIM</button>`;
+            }
+        }
+
+        function claimReward(key, amount) {
+            coins += amount;
+            updateCoinDisplay();
+            localStorage.setItem(`claimed_${key}`, 'true');
+
+            if (key === 'login') markAsClaimed('card-login', 'action-login');
+            if (key === 'use10') markAsClaimed('card-use10', 'action-use10');
+            if (key === 'use20') markAsClaimed('card-use20', 'action-use20');
+        }
+
+        function markAsClaimed(cardId, actionId) {
+            const card = document.getElementById(cardId);
+            const action = document.getElementById(actionId);
+            if (card) card.classList.add('claimed');
+            if (action) {
+                action.innerHTML = `<span class="status-claimed"><i class="fa-solid fa-circle-check"></i> CLAIMED</span>`;
+            }
+        }
+
+        function switchTab(tab) {
+            const dailyBtn = document.getElementById('btnDaily');
+            const monthlyBtn = document.getElementById('btnMonthly');
+            const dailyList = document.getElementById('dailyList');
+            const monthlyList = document.getElementById('monthlyList');
+
+            if (tab === 'daily') {
+                dailyBtn.classList.add('active');
+                monthlyBtn.classList.remove('active');
+                dailyList.style.display = 'flex';
+                monthlyList.style.display = 'none';
+            } else {
+                monthlyBtn.classList.add('active');
+                dailyBtn.classList.remove('active');
+                dailyList.style.display = 'none';
+                monthlyList.style.display = 'flex';
+            }
+        }
+    </script>
+
+</body>
+</html>
