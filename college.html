@@ -83,11 +83,16 @@
 <script>
     function loadCollegeGuidance(e) {
         e.preventDefault();
-        const selectedClass = document.getElementById('classSelect').value;
         const selectedStream = document.getElementById('streamSelect').value;
         
-        // Route dynamically or trigger API call based on selection
-        alert(`Loading resources for Class ${selectedClass} - ${selectedStream.toUpperCase()} Stream.`);
+        // Redirect based on selected stream regardless of class selection
+        if (selectedStream === 'science') {
+            window.location.href = 'collegescience.html';
+        } else if (selectedStream === 'commerce') {
+            window.location.href = 'collegecommerce.html';
+        } else if (selectedStream === 'arts') {
+            window.location.href = 'collegearts.html';
+        }
     }
 </script>
 </body>
