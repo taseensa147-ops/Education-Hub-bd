@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopathi - Achievements</title>
+    <!-- Google Fonts & FontAwesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --secondary: #06b6d4;
+            --accent: #f59e0b;
+            --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+            --card-bg: rgba(255, 255, 255, 0.08);
+            --card-border: rgba(255, 255, 255, 0.15);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: var(--bg-gradient);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+
+        .app-container {
+            width: 100%;
+            max-width: 430px;
+            height: 900px;
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--card-border);
+            border-radius: 32px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+            position: relative;
+        }
+
+        /* Standard Header Matching Home Page */
+        .app-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.25rem 1.25rem 0.75rem 1.25rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .brand-name {
+            font-size: 1.4rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #38bdf8, #818cf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .sp-coin-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            background: rgba(245, 158, 11, 0.15);
+            border: 1px solid rgba(245, 158, 11, 0.4);
+            padding: 0.35rem 0.6rem;
+            border-radius: 20px;
+            color: var(--accent);
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.2s;
+        }
+
+        .sp-coin-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .icon-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            color: var(--text-main);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: background 0.3s;
+        }
+
+        .icon-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        /* Top Achievement Showcase Podium */
+        .achievement-summary-card {
+            background: linear-gradient(180deg, rgba(234, 179, 8, 0.15) 0%, rgba(15, 23, 42, 0.4) 100%);
+            border: 1px solid rgba(234, 179, 8, 0.3);
+            border-radius: 20px;
+            padding: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .trophy-glass {
+            width: 75px;
+            height: 75px;
+            background: rgba(245, 158, 11, 0.2);
+            border: 2px solid var(--accent);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 20px rgba(245, 158, 11, 0.3);
+        }
+
+        .trophy-glass i {
+            font-size: 2.2rem;
+            color: #fef08a;
+            filter: drop-shadow(0 0 8px rgba(245, 158, 11, 0.8));
+        }
+
+        .summary-info {
+            flex: 1;
+            margin-left: 1rem;
+        }
+
+        .summary-score {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #fef08a;
+            line-height: 1;
+        }
+
+        .summary-subtitle {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+        }
+
+        .summary-badge {
+            margin-top: 0.4rem;
+            display: inline-block;
+            font-size: 0.65rem;
+            font-weight: 600;
+            background: rgba(56, 189, 248, 0.2);
+            color: #38bdf8;
+            padding: 0.2rem 0.5rem;
+            border-radius: 10px;
+            border: 1px solid rgba(56, 189, 248, 0.4);
+        }
+
+        /* Navigation Categories (PREPARATION, BATTLE, CAREER) */
+        .category-nav {
+            display: flex;
+            gap: 0.4rem;
+            background: rgba(0, 0, 0, 0.25);
+            padding: 0.3rem;
+            border-radius: 12px;
+            border: 1px solid var(--card-border);
+        }
+
+        .cat-btn {
+            flex: 1;
+            padding: 0.5rem 0.2rem;
+            border: none;
+            background: transparent;
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 0.72rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .cat-btn.active {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: #0f172a;
+            box-shadow: 0 0 10px rgba(245, 158, 11, 0.3);
+        }
+
+        /* Scroll Body */
+        .app-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .app-content::-webkit-scrollbar {
+            width: 4px;
+        }
+        .app-content::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+        }
+
+        /* Achievement Grid Layout */
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.85rem;
+        }
+
+        .achievement-badge-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 0.85rem 0.6rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 0.4rem;
+            position: relative;
+            transition: transform 0.2s, border-color 0.3s;
+        }
+
+        .achievement-badge-card.unlocked {
+            border-color: rgba(245, 158, 11, 0.5);
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(245, 158, 11, 0.05) 100%);
+        }
+
+        .badge-icon-box {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px dashed rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            color: var(--text-muted);
+            margin-bottom: 0.2rem;
+        }
+
+        .unlocked .badge-icon-box {
+            border-style: solid;
+            border-color: var(--accent);
+            background: rgba(245, 158, 11, 0.2);
+            color: #fef08a;
+            box-shadow: 0 0 12px rgba(245, 158, 11, 0.3);
+        }
+
+        .badge-title {
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--text-main);
+            line-height: 1.1;
+        }
+
+        .badge-desc {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            line-height: 1.2;
+            min-height: 28px;
+        }
+
+        .badge-status {
+            font-size: 0.6rem;
+            font-weight: 600;
+            padding: 0.15rem 0.5rem;
+            border-radius: 10px;
+            margin-top: 0.2rem;
+        }
+
+        .status-done {
+            background: rgba(52, 211, 153, 0.2);
+            color: #34d399;
+            border: 1px solid rgba(52, 211, 153, 0.4);
+        }
+
+        .status-lock {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-muted);
+            border: 1px solid var(--card-border);
+        }
+
+        /* Footer Navigation Bar */
+        .app-footer {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            background: rgba(15, 23, 42, 0.95);
+            border-top: 1px solid var(--card-border);
+            padding: 0.6rem 0;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.2rem;
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 0.65rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-item i {
+            font-size: 1.1rem;
+        }
+
+        .nav-item.active {
+            color: #38bdf8;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+        <!-- Header (Identical to Home Page) -->
+        <header class="app-header">
+            <div class="brand-name">Shopathi</div>
+            <div class="header-actions">
+                <a href="shop.html" class="sp-coin-btn" title="SP Coins Store">
+                    <i class="fa-solid fa-coins"></i>
+                    <span id="spCoinCount">250</span>
+                </a>
+                <a href="profile.html" class="icon-btn" title="User Profile">
+                    <i class="fa-solid fa-user"></i>
+                </a>
+                <a href="menu.html" class="icon-btn" title="Menu">
+                    <i class="fa-solid fa-bars"></i>
+                </a>
+            </div>
+        </header>
+
+        <!-- Main Content Scroll Area -->
+        <main class="app-content">
+
+            <!-- Achievement Points Showcase -->
+            <section class="achievement-summary-card">
+                <div class="trophy-glass">
+                    <i class="fa-solid fa-trophy"></i>
+                </div>
+                <div class="summary-info">
+                    <div class="summary-score" id="totalPoints">8,440</div>
+                    <div class="summary-subtitle">Total Achievement Points</div>
+                    <div class="summary-badge">Topped 90% Students</div>
+                </div>
+            </section>
+
+            <!-- Custom Tab Switcher (ALL, PREPARATION, BATTLE, CAREER) -->
+            <nav class="category-nav">
+                <button class="cat-btn active" onclick="filterCategory('all', this)">ALL</button>
+                <button class="cat-btn" onclick="filterCategory('preparation', this)">PREPARATION</button>
+                <button class="cat-btn" onclick="filterCategory('battle', this)">BATTLE</button>
+                <button class="cat-btn" onclick="filterCategory('career', this)">CAREER</button>
+            </nav>
+
+            <!-- Dynamic Achievement Grid -->
+            <section class="achievements-grid" id="achievementsGrid">
+                
+                <!-- PREPARATION (Duochingo Study Missions) -->
+                <div class="achievement-badge-card unlocked" data-cat="preparation">
+                    <div class="badge-icon-box"><i class="fa-solid fa-gamepad"></i></div>
+                    <div class="badge-title">Gamified Learner</div>
+                    <div class="badge-desc">Complete 10 lessons in Duochingo study mode</div>
+                    <div class="badge-status status-done"><i class="fa-solid fa-check"></i> Unlocked</div>
+                </div>
+
+                <div class="achievement-badge-card unlocked" data-cat="preparation">
+                    <div class="badge-icon-box"><i class="fa-solid fa-brain"></i></div>
+                    <div class="badge-title">Vocabulary Master</div>
+                    <div class="badge-desc">Solve 50 word matching challenges</div>
+                    <div class="badge-status status-done"><i class="fa-solid fa-check"></i> Unlocked</div>
+                </div>
+
+                <div class="achievement-badge-card" data-cat="preparation">
+                    <div class="badge-icon-box"><i class="fa-solid fa-bolt"></i></div>
+                    <div class="badge-title">Speed Demon</div>
+                    <div class="badge-desc">Finish 5 study games without single mistake</div>
+                    <div class="badge-status status-lock"><i class="fa-solid fa-lock"></i> Locked</div>
+                </div>
+
+                <!-- BATTLE (Exams & Tests Missions) -->
+                <div class="achievement-badge-card unlocked" data-cat="battle">
+                    <div class="badge-icon-box"><i class="fa-solid fa-skull-crossbones"></i></div>
+                    <div class="badge-title">Exam Conqueror</div>
+                    <div class="badge-desc">Pass 5 competitive exam mock battles</div>
+                    <div class="badge-status status-done"><i class="fa-solid fa-check"></i> Unlocked</div>
+                </div>
+
+                <div class="achievement-badge-card unlocked" data-cat="battle">
+                    <div class="badge-icon-box"><i class="fa-solid fa-crosshair"></i></div>
+                    <div class="badge-title">Headshot Prodigy</div>
+                    <div class="badge-desc">Score 100% accuracy in a timed subject battle</div>
+                    <div class="badge-status status-done"><i class="fa-solid fa-check"></i> Unlocked</div>
+                </div>
+
+                <div class="achievement-badge-card" data-cat="battle">
+                    <div class="badge-icon-box"><i class="fa-solid fa-shield-halved"></i></div>
+                    <div class="badge-title">Undefeated Rank</div>
+                    <div class="badge-desc">Win 3 consecutive exam battle duels</div>
+                    <div class="badge-status status-lock"><i class="fa-solid fa-lock"></i> Locked</div>
+                </div>
+
+                <!-- CAREER (Overall Platform Milestones) -->
+                <div class="achievement-badge-card unlocked" data-cat="career">
+                    <div class="badge-icon-box"><i class="fa-solid fa-calendar-check"></i></div>
+                    <div class="badge-title">Streak Sentinel</div>
+                    <div class="badge-desc">Maintain a continuous 12-day study streak</div>
+                    <div class="badge-status status-done"><i class="fa-solid fa-check"></i> Unlocked</div>
+                </div>
+
+                <div class="achievement-badge-card unlocked" data-cat="career">
+                    <div class="badge-icon-box"><i class="fa-solid fa-user-graduate"></i></div>
+                    <div class="badge-title">Work Hard Play Hard</div>
+                    <div class="badge-desc">Log over 10 hours of active studying in app</div>
+                    <div class="badge-status status-done"><i class="fa-solid fa-check"></i> Unlocked</div>
+                </div>
+
+            </section>
+
+        </main>
+
+        <!-- Navigation Footer matching Home Page -->
+        <footer class="app-footer">
+            <a href="home.html" class="nav-item">
+                <i class="fa-solid fa-house"></i>
+                <span>Home</span>
+            </a>
+            <a href="study.html" class="nav-item">
+                <i class="fa-solid fa-book-open"></i>
+                <span>Study</span>
+            </a>
+            <a href="duochingo.html" class="nav-item">
+                <i class="fa-solid fa-gamepad"></i>
+                <span>Duochingo</span>
+            </a>
+            <a href="setting.html" class="nav-item">
+                <i class="fa-solid fa-gear"></i>
+                <span>Setting</span>
+            </a>
+        </footer>
+    </div>
+
+    <script>
+        // Sync coin count with local storage
+        document.addEventListener('DOMContentLoaded', () => {
+            const coins = localStorage.getItem('spCoins') || 250;
+            document.getElementById('spCoinCount').innerText = coins;
+        });
+
+        // Filter Grid Badges by Category
+        function filterCategory(category, btnElement) {
+            // Update Active Tab Button
+            const buttons = document.querySelectorAll('.cat-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            btnElement.classList.add('active');
+
+            // Toggle Grid Items
+            const cards = document.querySelectorAll('.achievement-badge-card');
+            cards.forEach(card => {
+                if (category === 'all' || card.getAttribute('data-cat') === category) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
